@@ -2,6 +2,7 @@ import { Navbar } from "@/components/ui/navbar";
 import { Sidebar } from "@/components/ui/sidebar";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 export default function Dashboard() {
   return (
@@ -66,7 +67,15 @@ export default function Dashboard() {
               </CardHeader>
               <CardContent>
                 <div className="flex gap-4">
-                  <div className="w-32 h-24 bg-muted rounded-md"></div>
+                  <div className="relative w-32 h-24 rounded-md overflow-hidden">
+                    <Image
+                      src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&auto=format&fit=crop&q=60"
+                      alt="Minimalist Office Setup"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
+                  </div>
                   <div className="flex-1 space-y-2">
                     <div className="h-4 bg-muted rounded w-3/4"></div>
                     <div className="h-4 bg-muted rounded w-1/2"></div>
@@ -86,7 +95,15 @@ export default function Dashboard() {
               </CardHeader>
               <CardContent>
                 <div className="flex gap-4">
-                  <div className="w-32 h-24 bg-muted rounded-md"></div>
+                  <div className="relative w-32 h-24 rounded-md overflow-hidden">
+                    <Image
+                      src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&auto=format&fit=crop&q=60"
+                      alt="Modern Living Room"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
+                  </div>
                   <div className="flex-1 space-y-2">
                     <div className="h-4 bg-muted rounded w-3/4"></div>
                     <div className="h-4 bg-muted rounded w-1/2"></div>
