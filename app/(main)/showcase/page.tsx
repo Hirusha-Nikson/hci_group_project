@@ -90,7 +90,7 @@ const FurnitureShowcase = () => {
                     }).toString();
                     window.location.href = `/showcase/quickview/${encodeURIComponent(furniture.name)}?${params}`;
                   }}
-                >Qiuck View</Button>
+                >Qiuck View</Button>  
                 <Button variant={"outline"}>Card Action</Button>
               </CardFooter>
             </Card>
