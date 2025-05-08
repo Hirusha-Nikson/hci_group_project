@@ -71,11 +71,11 @@ const FurnitureShowcase = () => {
 
       {/* Body Section */}
       <div className="w-full py-12 border-t">
-        <div className="w-full grid grid-cols-4 items-center justify-center gap-4">
+        <div className="w-full grid grid-cols-3 items-center justify-center gap-4">
           {furnitures.map((furniture) => (
             <Card className="w-full" key={furniture.name}>
               <CardContent>
-                <img src={furniture.image} alt={furniture.name} width={280} height={200} />
+                <img src={furniture.image} alt={furniture.name} width={280} height={200} className="border w-full "/>
               </CardContent>
               <CardHeader>
                 <CardTitle>{furniture.name}</CardTitle>
