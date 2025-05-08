@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+// import { Input } from "@/components/ui/input";
 
 
 export default function Contact() {
@@ -15,11 +15,11 @@ export default function Contact() {
             <form className="w-full mt-8">
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">Name</label>
-                    <Input id="name" type="text" placeholder="Your Name" className="mt-2" required/>
+                    <input id="name" type="text" placeholder="Your Name" className="mt-2" required/>
                 </div>
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">Email</label>
-                    <Input id="email" type="email" placeholder="Your Email" className="mt-2" required />
+                    <input id="email" type="email" placeholder="Your Email" className="mt-2" required />
                 </div>
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="message">Message</label>
