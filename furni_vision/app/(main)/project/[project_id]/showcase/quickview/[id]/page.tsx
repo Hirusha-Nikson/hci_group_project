@@ -2,12 +2,14 @@
 import { Button } from "@/components/ui/button";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
+import { useUser } from "@clerk/nextjs";
 import { OrbitControls, useGLTF } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import { useQuery } from "convex/react";
+import { useMutation, useQuery } from "convex/react";
 import { Undo, X } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
+import { toast } from "sonner";
 
 function DynamicModel({
   url,
@@ -32,7 +34,11 @@ const QuickView = () => {
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
   const [originalColor, setOriginalColor] = useState<string | null>(null);
 
+  const [isCreating, setIsCreating] = useState(false);
+
   const params = useParams();
+
+  const user = useUser();
 
   const router = useRouter();
 
@@ -47,6 +53,21 @@ const QuickView = () => {
       setOriginalColor(model.colors[0]); // assume first is original or customize
     }
   }, [model, originalColor]);
+
+  const createUsedModel = useMutation(api.usedDesigns.createUsedDesign);
+
+  const handleCreateUsedModel = async () => {
+    setIsCreating(true);
+    await createUsedModel({
+      designId: params.project_id as Id<"designs">,
+      modelId: id,
+      userId: user?.user?.id || "",
+      name: model?.name || "",
+      colors: selectedColor || "",
+    }).then(() => toast.success("Added to your design!"))
+    .catch(() => toast.error("Failed to add to your design."))
+    .finally(() => setIsCreating(false));
+  };
 
   return (
     <div className="w-full mx-auto min-h-screen flex flex-col justify-center px-12 bg-foreground/40">
@@ -121,7 +142,7 @@ const QuickView = () => {
               ))}
           </div>
 
-          <Button className="mt-auto" onClick={() => router.back()}>
+          <Button className="mt-auto" onClick={() => {handleCreateUsedModel()}} disabled={isCreating}>
             Add to design
           </Button>
         </div>

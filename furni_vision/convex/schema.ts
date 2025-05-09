@@ -1,6 +1,6 @@
 import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
-import { color } from "three/tsl";
+import { color, mod } from "three/tsl";
 
 export default defineSchema({
 
@@ -16,4 +16,20 @@ export default defineSchema({
         position:v.optional(v.array(v.number())),
         modelId:v.string(), //the URL
     }),
+
+
+    designs: defineTable({
+        name:v.string(),
+        ownerName:v.string(),
+        ownerId:v.string(),
+    }),
+
+    usedDesigns: defineTable({
+        designId:v.id("designs"),
+        modelId:v.id("models"),
+        userId:v.string(),
+        name:v.string(),
+        colors:v.string(),
+    }),
+
 });
