@@ -1,10 +1,10 @@
 "use client";
-import { Suspense, useRef } from "react";
-import { useFrame, Canvas } from "@react-three/fiber";
+import { Suspense} from "react";
+import { Canvas } from "@react-three/fiber";
 import { OrbitControls, useGLTF } from "@react-three/drei";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
-import { div } from "three/tsl";
+
 
 
 function DynamicModel({ url, ...props }: { url: string; [key: string]: any }) {
