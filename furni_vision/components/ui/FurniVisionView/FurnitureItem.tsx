@@ -172,7 +172,7 @@ export const FurnitureCatalog = () => {
   };
 
   return (
-    <div className="p-6 bg-white shadow-sm rounded-2xl">
+    <div className="p-6 bg-white shadow-sm rounded-2xl h-screen overflow-y-auto">
       <div className="grid grid-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div className="">
           <h2 className="text-xl font-bold text-gray-900">Furniture Catalog</h2>
@@ -226,7 +226,7 @@ export const FurnitureCatalog = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-4 gap-5">
+      <div className="grid grid-cols-1 gap-5">
         {catalogItems.map((item) => (
           <FurnitureItem key={item.id} item={item} />
         ))}

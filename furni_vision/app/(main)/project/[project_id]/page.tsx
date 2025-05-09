@@ -38,7 +38,7 @@ export default function ProjectID() {
                     </Button>
                 </div>
                 <div className='w-full h-60vh'>
-                    <Button asChild className='w-full h-full'>
+                    <Button asChild className='w-full h-full' onClick={() => router.push(`/project/${Id}/FurniVision`)}>
                         <div className='flex flex-col items-center justify-center gap-4'>
                             <Codepen className='size-12'/>
                             <h1>Open 2D & 3D Playground</h1>

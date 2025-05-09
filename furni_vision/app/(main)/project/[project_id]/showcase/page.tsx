@@ -51,7 +51,7 @@ const FurnitureShowcase = () => {
       <div className="w-full flex items-center justify-between py-8">
         <div>
           <h1 className="text-3xl font-bold">Furniture Showcase</h1>
-          {/* <p className="text-muted-foreground text-sm">Collect Prebuild Objects & Models for <span className="font-bold">{design?.name}</span></p> */}
+          <p className="text-muted-foreground text-sm">Collect Prebuild Objects & Models for <span className="font-bold">{design?.name}</span></p>
         </div>
         <div>
           <DropdownMenu>
