@@ -16,6 +16,7 @@ export const saveModel = mutation({
     category: v.string(),
     price: v.number(),
     description: v.string(),
+    colors: v.optional(v.array(v.string())),
   },
   handler: async (ctx, args) => {
     const modelId = args.storageId;
@@ -27,6 +28,7 @@ export const saveModel = mutation({
       category: args.category,
       price: args.price,
       description: args.description,
+      colors: args.colors,
       modelId: fileUrl ?? "",
     });
   },

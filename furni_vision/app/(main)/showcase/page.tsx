@@ -9,44 +9,22 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-// import Image from "next/image";
-
-const furnitures = [
-  {
-    name: "Furniture 1",
-    image: "https://png.pngtree.com/png-clipart/20210127/ourmid/pngtree-3d-improvement-section-sofa-furniture-png-image_2846766.jpg",
-    description: "Furniture description 1"
-  },
-  {
-    name: "Furniture 2",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7YNjax1mo-dzmIn2ltkUHHh5iFkR-0Uv_YQqzTaB6MjL3iUkNE_ei3t8Qnl547Y3mNFQ&usqp=CAU",
-    description: "Furniture description 2"
-  },
-  {
-    name: "Furniture 3",
-    image: "https://png.pngtree.com/png-clipart/20220603/ourmid/pngtree-simple-3d-chair-home-furniture-png-image_4804523.png",
-    description: "Furniture description 3"
-  },
-  {
-    name: "Furniture 4",
-    image: "https://png.pngtree.com/png-vector/20240512/ourlarge/pngtree-3d-mini-wooden-chair-png-image_12440327.png",
-    description: "Furniture description 4"
-  },
-  {
-    name: "Furniture 5",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqoxBzfZvXLixafY29BTAHw0pQa_wAqM7ROQSzqtyTAUm4fEucP4zFETcxrHZodD60FvM&usqp=CAU",
-    description: "Furniture description 5"
-  },
-  {
-    name: "Furniture 6",
-    image: "https://png.pngtree.com/png-clipart/20220610/ourmid/pngtree-home-furniture-3d-sofa-chair-red-color-png-image_4938916.png",
-    description: "Furniture description 6"
-  },
-];
-
-// https://dashboard.convex.dev/t/sugeeshwara-rathnayaka
+import { api } from "@/convex/_generated/api";
+import { useQuery } from "convex/react";
+import { useRouter } from "next/navigation";
 
 const FurnitureShowcase = () => {
+
+  const router = useRouter();
+
+  const models = useQuery(api.uploadModel.getModels);
+
+  const furnitures = (models ?? []).map((model) => ({
+    id: model._id,
+    name: model.name,
+    image: model.image,
+    description: model.description,
+  }));
 
   return (
     <div className="max-w-7xl mx-auto min-h-screen py-12">
@@ -75,7 +53,7 @@ const FurnitureShowcase = () => {
           {furnitures.map((furniture) => (
             <Card className="w-full" key={furniture.name}>
               <CardContent>
-                <img src={furniture.image} alt={furniture.name} width={280} height={200} className="border w-full "/>
+                <img src={furniture.image} alt={furniture.name} width={280} height={156} className="border w-full rounded-lg"/>
               </CardContent>
               <CardHeader>
                 <CardTitle>{furniture.name}</CardTitle>
@@ -84,14 +62,9 @@ const FurnitureShowcase = () => {
               <CardFooter className="gap-2">
                 <Button 
                 onClick={() => {
-                    const params = new URLSearchParams({
-                      image: furniture.image,
-                      description: furniture.description,
-                    }).toString();
-                    window.location.href = `/showcase/quickview/${encodeURIComponent(furniture.name)}?${params}`;
+                    router.push(`/showcase/quickview/${furniture.id}`);
                   }}
                 >Qiuck View</Button>
-                <Button variant={"outline"}>Card Action</Button>
               </CardFooter>
             </Card>
           ))}

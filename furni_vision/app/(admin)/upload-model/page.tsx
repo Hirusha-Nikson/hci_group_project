@@ -2,7 +2,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { api } from "@/convex/_generated/api";
-import { is } from "@react-three/fiber/dist/declarations/src/core/utils";
 import { useMutation } from "convex/react";
 import { useState } from "react";
 
@@ -16,6 +15,7 @@ export default function ModelUploader() {
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState(0);
+  const [colors, setColors] = useState("");
   const [description, setDescription] = useState("");
 
   const handleUpload = async () => {
@@ -28,7 +28,7 @@ export default function ModelUploader() {
       body: file,
     });
 
-    const defaultName = name || file.name;
+    const defaultName = file.name;
 
     const { storageId } = await res.json();
 
@@ -41,6 +41,11 @@ export default function ModelUploader() {
       description,
     });
     setIsUploading(false);
+    setFile(null);
+    setName("");
+    setCategory("");
+    setPrice(0);
+    setDescription("");
     alert("Model uploaded successfully!");
   };
 
@@ -50,6 +55,7 @@ export default function ModelUploader() {
       <Input type="text" placeholder="Name" onChange={(e) => setName(e.target.value)} />
       <Input type="text" placeholder="Category" onChange={(e) => setCategory(e.target.value)} />
       <Input type="number" placeholder="Price" onChange={(e) => setPrice(Number(e.target.value))} />
+      <Input type="text" placeholder="Colors" onChange={(e) => setColors(e.target.value)} />
       <textarea placeholder="Description" onChange={(e) => setDescription(e.target.value)} className="border rounded p-2 min-h-36"/>
       <Button onClick={handleUpload} disabled={isUploading}>{isUploading ? "Uploading..." : "Upload"}</Button>
     </div>
